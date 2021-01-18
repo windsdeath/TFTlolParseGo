@@ -1,38 +1,50 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="5a82dab5-2422-4ab2-90b9-14d159cad78f" name="Default Changelist" comment="" />
+    <list default="true" id="5a82dab5-2422-4ab2-90b9-14d159cad78f" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/main.go" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="GOROOT" path="/usr/local/go" />
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="ProjectId" id="1n0tRHwgPFOVq7C9lcWT10QedsV" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="go.import.settings.migrated" value="true" />
     <property name="go.sdk.automatically.set" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="settings.editor.selected.configurable" value="Errors" />
   </component>
-  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="SpellCheckerSettings" BundledDictionaries="0" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" Dictionaries="0" CorrectionsLimit="5" DefaultDictionary="application-level" UseSingleDictionary="true" />
   <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="3" />
+    <option name="version" value="2" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="221" y="89" key="SettingsEditor" timestamp="1610538889868">
-      <screen x="0" y="0" width="1440" height="900" />
+    <state x="314" y="110" key="SettingsEditor" timestamp="1610952562640">
+      <screen x="0" y="0" width="2048" height="1112" />
     </state>
+    <state x="314" y="110" key="SettingsEditor/-1920.24.1920.1040/0.0.2048.1112/2048.23.1920.1040@0.0.2048.1112" timestamp="1610556312998" />
+    <state x="314" y="110" key="SettingsEditor/-1920.24.1920.1040/2048.23.1920.1040/0.0.2048.1112@0.0.2048.1112" timestamp="1610952562640" />
     <state x="221" y="89" key="SettingsEditor/0.0.1440.900@0.0.1440.900" timestamp="1610538889868" />
-    <state x="385" y="196" key="search.everywhere.popup" timestamp="1610538897029">
-      <screen x="0" y="0" width="1440" height="900" />
+    <state x="548" y="242" width="672" height="678" key="search.everywhere.popup" timestamp="1610946600681">
+      <screen x="0" y="0" width="2048" height="1112" />
     </state>
+    <state x="548" y="242" width="672" height="678" key="search.everywhere.popup/-1920.24.1920.1040/2048.23.1920.1040/0.0.2048.1112@0.0.2048.1112" timestamp="1610946600681" />
     <state x="385" y="196" key="search.everywhere.popup/0.0.1440.900@0.0.1440.900" timestamp="1610538897029" />
   </component>
 </project>

@@ -4,9 +4,8 @@ import (
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
+	//"reflect"
 )
-
-type Champ []ChampElement
 
 type ChampElement struct {
 	Kind []string `json:"kind"`
@@ -15,17 +14,332 @@ type ChampElement struct {
 	Cost string   `json:"cost"`
 }
 
+var ChosenChamps []string
 
-	var champs Champ
+func find(ChampNames []string, Level int, Chosen string, champs []ChampElement) []ChampElement {
+	// ChampNames에 있는 챔프의 정보를 ChosenChamps에 넣는다 (name, kind, job, cost)
+	var finded []ChampElement
+	for _, champ := range champs { // champs중 ChampNames의 값과 일치하는 값의 구조체를 반환
+		for _, champName := range ChampNames {
+			if champName == champ.Name {
+				finded = append(finded, champ)
+			}
+		}
+	}
+	return finded
+}
+
 func main() {
+	doc := `
+[{
+    "kind": ["대장군"],
+    "job": ["선봉대"],
+    "name": "가렌",
+    "cost": "1"
+}, {
+    "kind": ["신성"],
+    "job": ["흡수자"],
+    "name": "나서스",
+    "cost": "1"
+}, {
+    "kind": ["우화"],
+    "job": ["선봉대"],
+    "name": "노틸러스",
+    "cost": "2"
+}, {
+    "kind": ["나무정령"],
+    "job": ["싸움꾼"],
+    "name": "누누와 윌럼프",
+    "cost": "3"
+}, {
+    "kind": ["대장군"],
+    "job": ["명사수"],
+    "name": "니달리",
+    "cost": "1"
+}, {
+    "kind": ["우화"],
+    "job": ["신비술사"],
+    "name": "니코",
+    "cost": "3"
+}, {
+    "kind": ["행운"],
+    "job": ["학살자"],
+    "name": "다리우스",
+    "cost": "3"
+}, {
+    "kind": ["영혼"],
+    "job": ["암살자"],
+    "name": "다이애나",
+    "cost": "1"
+}, {
+    "kind": ["나무정령"],
+    "job": ["귀감"],
+    "name": "라칸",
+    "cost": "2"
+}, {
+    "kind": ["나무정령"],
+    "job": ["요술사"],
+    "name": "룰루",
+    "cost": "2"
+}, {
+    "kind": ["신성"],
+    "job": ["결투가"],
+    "name": "리신",
+    "cost": "5"
+}, {
+    "kind": ["나무정령"],
+    "job": ["싸움꾼"],
+    "name": "마오카이",
+    "cost": "1"
+}, {
+    "kind": ["선지자"],
+    "job": ["흡수자"],
+    "name": "모르가나",
+    "cost": "4"
+}, {
+    "kind": ["대장군"],
+    "job": ["싸움꾼"],
+    "name": "바이",
+    "cost": "2"
+}, {
+    "kind": ["나무정령"],
+    "job": ["요술사"],
+    "name": "베이가",
+    "cost": "3"
+}, {
+    "kind": ["용의 영혼"],
+    "job": ["선봉대"],
+    "name": "브라움",
+    "cost": "2"
+}, {
+    "kind": ["용의 영혼"],
+    "job": ["요술사"],
+    "name": "브랜드",
+    "cost": "1"
+}, {
+    "kind": ["광신도"],
+    "job": ["흡수자"],
+    "name": "블라디미르",
+    "cost": "2"
+}, {
+    "kind": ["무모한 자"],
+    "job": ["명사수", "학살자"],
+    "name": "사미라",
+    "cost": "5"
+}, {
+    "kind": ["행운"],
+    "job": ["선봉대"],
+    "name": "세주아니",
+    "cost": "4"
+}, {
+    "kind": ["우두머리"],
+    "job": ["싸움꾼"],
+    "name": "세트",
+    "cost": "5"
+}, {
+    "kind": ["닌자"],
+    "job": ["신비술사"],
+    "name": "쉔",
+    "cost": "4"
+}, {
+    "kind": ["용의 영혼"],
+    "job": ["싸움꾼"],
+    "name": "쉬바나",
+    "cost": "3"
+}, {
+    "kind": ["용의 영혼"],
+    "job": ["흡수자"],
+    "name": "스웨인",
+    "cost": "5"
+}, {
+    "kind": ["광신도"],
+    "job": ["명사수"],
+    "name": "시비르",
+    "cost": "3"
+}, {
+    "kind": ["용의 영혼"],
+    "job": ["요술사"],
+    "name": "아우렐리온 솔",
+    "cost": "4"
+}, {
+    "kind": ["대장군"],
+    "job": ["귀감", "황제"],
+    "name": "아지르",
+    "cost": "5"
+}, {
+    "kind": ["닌자"],
+    "job": ["암살자"],
+    "name": "아칼리",
+    "cost": "3"
+}, {
+    "kind": ["광신도"],
+    "job": ["선봉대"],
+    "name": "아트록스",
+    "cost": "4"
+}, {
+    "kind": ["행운"],
+    "job": ["요술사"],
+    "name": "애니",
+    "cost": "2"
+}, {
+    "kind": ["추방자"],
+    "job": ["결투가"],
+    "name": "야스오",
+    "cost": "1"
+}, {
+    "kind": ["광신도"],
+    "job": ["귀감"],
+    "name": "엘리스",
+    "cost": "1"
+}, {
+    "kind": ["신성"],
+    "job": ["선봉대"],
+    "name": "오공",
+    "cost": "1"
+}, {
+    "kind": ["나무정령"],
+    "job": ["대장장이", "선봉대"],
+    "name": "오른",
+    "cost": "5"
+}, {
+    "kind": ["용의 영혼"],
+    "job": ["학살자"],
+    "name": "올라프",
+    "cost": "4"
+}, {
+    "kind": ["추방자"],
+    "job": ["조율자"],
+    "name": "요네",
+    "cost": "5"
+}, {
+    "kind": ["영혼"],
+    "job": ["신비술사"],
+    "name": "유미",
+    "cost": "3"
+}, {
+    "kind": ["선지자", "신성"],
+    "job": ["조율자"],
+    "name": "이렐리아",
+    "cost": "3"
+}, {
+    "kind": ["대장군"],
+    "job": ["귀감"],
+    "name": "자르반 4세",
+    "cost": "4"
+}, {
+    "kind": ["나무정령"],
+    "job": ["귀감", "처형자"],
+    "name": "자야",
+    "cost": "4"
+}, {
+    "kind": ["선지자"],
+    "job": ["신비술사"],
+    "name": "잔나",
+    "cost": "2"
+}, {
+    "kind": ["신성"],
+    "job": ["결투가"],
+    "name": "잭스",
+    "cost": "2"
+}, {
+    "kind": ["닌자"],
+    "job": ["학살자"],
+    "name": "제드",
+    "cost": "2"
+}, {
+    "kind": ["광신도"],
+    "job": ["신비술사"],
+    "name": "질리언",
+    "cost": "5"
+}, {
+    "kind": ["우화"],
+    "job": ["싸움꾼"],
+    "name": "초가스",
+    "cost": "4"
+}, {
+    "kind": ["대장군", "행운"],
+    "job": ["암살자"],
+    "name": "카타리나",
+    "cost": "3"
+}, {
+    "kind": ["광신도"],
+    "job": ["결투가"],
+    "name": "칼리스타",
+    "cost": "3"
+}, {
+    "kind": ["닌자"],
+    "job": ["귀감"],
+    "name": "케넨",
+    "cost": "3"
+}, {
+    "kind": ["신성"],
+    "job": ["처형자"],
+    "name": "케일",
+    "cost": "4"
+}, {
+    "kind": ["영혼"],
+    "job": ["처형자"],
+    "name": "킨드레드",
+    "cost": "3"
+}, {
+    "kind": ["선지자"],
+    "job": ["암살자"],
+    "name": "탈론",
+    "cost": "4"
+}, {
+    "kind": ["행운"],
+    "job": ["싸움꾼"],
+    "name": "탐 켄치",
+    "cost": "1"
+}, {
+    "kind": ["용의 영혼"],
+    "job": ["명사수"],
+    "name": "트리스타나",
+    "cost": "1"
+}, {
+    "kind": ["대장군"],
+    "job": ["결투가", "학살자"],
+    "name": "트린다미어",
+    "cost": "4"
+}, {
+    "kind": ["광신도"],
+    "job": ["요술사"],
+    "name": "트위스티드 페이트",
+    "cost": "1"
+}, {
+    "kind": ["영혼"],
+    "job": ["명사수"],
+    "name": "티모",
+    "cost": "2"
+}, {
+    "kind": ["광신도"],
+    "job": ["암살자", "학살자"],
+    "name": "파이크",
+    "cost": "2"
+}, {
+    "kind": ["선지자"],
+    "job": ["결투가"],
+    "name": "피오라",
+    "cost": "1"
+}]
+`
+	var champs []ChampElement
+	json.Unmarshal([]byte(doc), &champs)
+
 	champ, err := ioutil.ReadFile("champ.json")
 	if err != nil {
 		return
 	}
-
 	json.Unmarshal(champ, &champs)
-	fmt.Print(champs[0].Job[0])
+	//fmt.Print(champs[0].Job[0])
+	finded := find([]string{"피오라", "파이크"}, 5, "hi", champs)
+	fmt.Println(finded)
 }
+
+// ChampNames에 있는 챔프를 ChampList에서 삭제
+// ChosenChamps의 test(ChosenChamp.job)+ test(ChosenChamp.kind)+ cost +Chosen했을때의 값이 높은 것 우선으로 +2했을때 +3했을때 총 밸류가 높은 값을 choice에 저장
+// 위 함수를 목표Level까지 재귀실행
+// 결과값 choice를 반환
 
 // func countValue(choosenChamp []ChampElement, choosen string) { // 골라진 챔프와 선받자를 받아 현재 밸류를 리턴
 // 	let sumCostValue = choosenChamp.reduce(function(acc, cc) {
